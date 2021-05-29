@@ -1,0 +1,148 @@
+﻿<UserControl x:Class="PhZx.Views.SelectFileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PhZx" 
+             xmlns:hc="https://handyorg.github.io/handycontrol" xmlns:views="clr-namespace:PhZx.Views"
+             mc:Ignorable="d"
+             d:Height="800" d:Width="1200" d:Background="White">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <ToggleButton  Effect="{StaticResource EffectShadow1}" hc:BorderElement.CornerRadius="60" Padding="20,0,0,0" Grid.Column="1" Width="60" Height="60" Margin="-30 0 0 0">
+                
+                <ToggleButton.Triggers>
+                    <EventTrigger RoutedEvent="ToggleButton.Checked" >
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:.3" To="0" Storyboard.TargetProperty="Width" Storyboard.TargetName="cGrid"/>
+                                <DoubleAnimation Duration="0:0:.3" To="180" Storyboard.TargetProperty="(Path.RenderTransform).(RotateTransform.Angle)" Storyboard.TargetName="mPath"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="ToggleButton.Unchecked" >
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:.3" To="310" Storyboard.TargetProperty="Width" Storyboard.TargetName="cGrid"/>
+                                <DoubleAnimation Duration="0:0:.3" To="0" Storyboard.TargetProperty="(Path.RenderTransform).(RotateTransform.Angle)" Storyboard.TargetName="mPath"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+
+                </ToggleButton.Triggers>
+                <Path x:Name="mPath" RenderTransformOrigin=".5 .5" Width="20" Height="20" Fill="Gray" Data="{StaticResource LeftGeometry}" Stretch="Uniform">
+                    <Path.RenderTransform>
+                        <RotateTransform Angle="0"/>
+                    </Path.RenderTransform>
+                </Path>
+            </ToggleButton>
+            <Grid Width="310" Name="cGrid" Background="{DynamicResource RegionBrush}" Effect="{StaticResource EffectShadow1}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
+                <Grid>
+                    <TextBlock Text="{DynamicResource rCompressed}" FontSize="18" Margin="5 10"/>
+                    <Button Command="{Binding ClearRecentCommand}" HorizontalAlignment="Right" BorderThickness="0" Margin="10" ToolTip="{DynamicResource ClearAll}">
+                        <Button.Content>
+                            <Image Source="{StaticResource clear}" Width="18" Height="18"/>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+                <ScrollViewer Grid.Row="1" Visibility="Visible" FlowDirection="LeftToRight">
+                    <ItemsControl ItemsSource="{Binding RecentItems}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <views:RecentItemView Height="50" x:Name="mContent" Padding="7 0" Margin="0 4"/>
+                                <DataTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Background" Value="{DynamicResource PrimaryBrush}" TargetName="mContent"/>
+                                        <Setter Property="Foreground" Value="white" TargetName="mContent"/>
+                                    </Trigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+                <StackPanel d:Visibility="Visible" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel.Style>
+                        <Style TargetType="{x:Type StackPanel}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RecentItems.Count}" Value="0">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <Image Source="{StaticResource EmptyBox}" Width="85" Height="85"/>
+                    <TextBlock Text="{DynamicResource nothing}" Margin="15" FontSize="14"/>
+                </StackPanel>
+            </Grid>
+            
+            
+        </Grid>
+        <Border Grid.Column="1" MinWidth="550" MaxWidth="680" MinHeight="450" MaxHeight="580"  Background="{DynamicResource DefaultBrush}" Margin="25" CornerRadius="23">
+            <Grid>
+                <Border Style="{StaticResource BorderLoading}" d:Visibility="Collapsed">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <hc:LoadingCircle Margin="10" Style="{StaticResource LoadingCircleLight}"/>
+                        <TextBlock Text="{Binding LoadingText}" Foreground="White" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+                <Rectangle Style="{StaticResource RectangleDargDrop}"
+                            DragOver="Rectangle_DragOver"
+                            Drop="Rectangle_Drop">
+                    <Rectangle.Triggers>
+                        <EventTrigger RoutedEvent="DragEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="{DynamicResource BorderColor}" Duration="0:0:0.3" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="DragLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="{DynamicResource DefaultColor}" Duration="0:0:0.3" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Drop">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="{DynamicResource DefaultColor}" Duration="0:0:0.3" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Rectangle.Triggers>
+                </Rectangle>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Margin" Value="9"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="IsHitTestVisible" Value="False"/>
+                            <Setter Property="FontSize" Value="20"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <TextBlock Text="{DynamicResource DragDrop}"/>
+                    <TextBlock Text="{DynamicResource Or}" />
+                    <Button Click="Button_Click" Style="{StaticResource ButtonPrimary}" FontSize="14"  Content="{DynamicResource SelectFiles}" Margin="9" Width="103" Height="30" Cursor="Hand"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

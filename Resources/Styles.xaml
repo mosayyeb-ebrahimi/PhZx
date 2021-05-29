@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:hc="https://handyorg.github.io/handycontrol" xmlns:phzx="clr-namespace:PhZx">
+    <Style x:Key="RectangleDargDrop" TargetType="{x:Type Rectangle}">
+        <Setter Property="Stroke" Value="#DFDFDF"/>
+        <Setter Property="Margin" Value="20"/>
+        <Setter Property="StrokeDashArray" Value="4"/>
+        <Setter Property="StrokeThickness" Value="2"/>
+        <Setter Property="RadiusX" Value="16"/>
+        <Setter Property="RadiusY" Value="16"/>
+        <Setter Property="Fill" Value="{DynamicResource DefaultBrush}"/>
+        <Setter Property="AllowDrop" Value="True"/>
+    </Style>
+    <Style x:Key="BackButton" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonInfo}">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="hc:IconElement.Width" Value="40"/>
+        <Setter Property="hc:IconElement.Height" Value="20"/>
+        
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="FontSize" Value="15"/>
+    </Style>
+    <Style x:Key="BorderLoading" TargetType="{x:Type Border}">
+        <Setter Property="Visibility" Value="{Binding IsLoading,Converter={phzx:BooleanToVisibilityValueConverter}}"/>
+        <Setter Property="Panel.ZIndex" Value="1"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="Height" Value="110"/>
+        <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
+        <Setter Property="CornerRadius" Value="10"/>
+    </Style>
+</ResourceDictionary>

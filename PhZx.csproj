@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\pic.ico</ApplicationIcon>
+    <Platforms>AnyCPU;x86;x64</Platforms>
+    <PublishTrimmed>True</PublishTrimmed>
+    <TrimMode>Link</TrimMode>
+    <Authors>Sina Ebrahimi</Authors>
+    <Company>SE Team</Company>
+    <Description>App for image compression</Description>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <TrimmerRootAssembly Include="System.Runtime" />
+    <TrimmerRootAssembly Include="System.Runtime.Extensions" />
+    <TrimmerRootAssembly Include="System.Diagnostics.Debug" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\3.jpg" />
+    <None Remove="Resources\Fonts\Lexend-Regular.ttf" />
+    <None Remove="Resources\Fonts\Lexend-SemiBold.ttf" />
+    <None Remove="Resources\Fonts\shabnam.ttf" />
+    <None Remove="Resources\Fonts\Vazir-Regular.ttf" />
+    <None Remove="Resources\pic.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HandyControl" Version="3.1.0" />
+    <PackageReference Include="itext7" Version="7.1.15" />
+    <PackageReference Include="NetVips" Version="2.0.0" />
+    <PackageReference Include="NetVips.Native.win-x64" Version="8.10.6" />
+    <PackageReference Include="ReactiveUI.Fody" Version="13.3.2" />
+    <PackageReference Include="ReactiveUI.WPF" Version="13.3.2" />
+    <PackageReference Include="WinCopies.WindowsAPICodePack.Shell" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Fonts\Lexend-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fonts\Lexend-SemiBold.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fonts\shabnam.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fonts\Vazir-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\pic.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\App.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>App.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\App.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>App.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

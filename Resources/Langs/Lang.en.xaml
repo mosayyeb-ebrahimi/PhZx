@@ -1,0 +1,41 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <system:String x:Key="LangCode">en</system:String>
+    <system:String x:Key="DragDrop">Drag &amp; Drop</system:String>
+    <system:String x:Key="FaLang">Persian</system:String>
+    <system:String x:Key="EnLang">English</system:String>
+    <system:String x:Key="Lang">Language</system:String>
+    <system:String x:Key="Theme">Theme</system:String>
+    <system:String x:Key="dTheme">Dark</system:String>
+    <system:String x:Key="lTheme">Light</system:String>
+    <system:String x:Key="vTheme">Violet</system:String>
+    <system:String x:Key="Or">Or</system:String>
+    <system:String x:Key="SelectFiles">Select File(s)</system:String>
+    <system:String x:Key="CompressButton">Compress Image(s)</system:String>
+    <system:String x:Key="Compressed">Compressed</system:String>
+    <system:String x:Key="CreatingThumb">Creating Thumbnail</system:String>
+    <system:String x:Key="Completed">Completed</system:String>
+    <system:String x:Key="OpenFolder">OpenFolder</system:String>
+    <system:String x:Key="Back">Back</system:String>
+    <system:String x:Key="Suffix">Suffix With</system:String>
+    <system:String x:Key="Quality">Quality</system:String>
+    <system:String x:Key="Resize">Resize</system:String>
+    <system:String x:Key="Width">Width</system:String>
+    <system:String x:Key="Height">Height</system:String>
+    <system:String x:Key="rCompressed">Recent Works</system:String>
+    <system:String x:Key="nothing">There is nothing to show</system:String>
+    <system:String x:Key="ClearAll">Clear all</system:String>
+    <system:String x:Key="WorkName">Work Name</system:String>
+    <system:String x:Key="Location">Location</system:String>
+    <system:String x:Key="Rename">Rename</system:String>
+    <system:String x:Key="GenZip">Generate Zip File</system:String>
+    <system:String x:Key="lhint">Leave empty for default location</system:String>
+    <system:String x:Key="rhint">If checked all images will be renamed with entered name</system:String>
+    <system:String x:Key="wplc">Nature...</system:String>
+    <system:String x:Key="rplc">New Name</system:String>
+    <system:String x:Key="gSettings">Global Settings</system:String>
+    <system:String x:Key="sSettings">Selected Image Settings</system:String>
+    <system:String x:Key="EmptyErr">Must not be empty</system:String>
+    <system:String x:Key="GenPdf">Generate Pdf File</system:String>
+
+</ResourceDictionary>

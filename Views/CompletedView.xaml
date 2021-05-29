@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="PhZx.Views.CompletedView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800" 
+             Background="{DynamicResource RegionBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel VerticalAlignment="Bottom">
+            <Image Width="185" Height="185" 
+               Source="{StaticResource CompletedImage}"/>
+            <TextBlock Text="{DynamicResource Completed}" 
+                   FontSize="30" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center" Margin="0 20 0 0"/>
+        </StackPanel>
+        <StackPanel VerticalAlignment="Top" Margin="0 40 0 0" Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+            <hc:TextBox FlowDirection="LeftToRight" Text="{Binding Path}" IsReadOnly="True" Width="260" FontSize="16" Height="40" />
+            <Button Cursor="Hand" Command="{Binding OpenInExplorerCommand}"   Height="40" Width="40">
+                <Image Width="28" Height="18" Stretch="UniformToFill" Source="{StaticResource OpenFolder}"/>
+            </Button>
+        </StackPanel>
+        <Button Grid.Row="2" Margin="0 0 0 35" Style="{StaticResource BackButton}" 
+                x:Name="GoBackBtn"
+                Content="{DynamicResource Back}" 
+                Width="200" 
+                Height="45" />
+    </Grid>
+</UserControl>

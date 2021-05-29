@@ -1,0 +1,53 @@
+﻿<hc:Window x:Class="PhZx.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:rx="http://reactiveui.net"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PhZx"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        mc:Ignorable="d"
+        Tag="{DynamicResource LangCode}"
+        x:Name="this"
+        Title="{Binding AppName}" Height="820" Width="1200"
+        Icon="Resources/pic.ico"
+        TextElement.FontFamily="{StaticResource Lexend}"
+        WindowStartupLocation="CenterScreen">
+    <hc:Window.NonClientAreaContent>
+        <Grid>
+            <StackPanel VerticalAlignment="Stretch"  HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button x:Name="SettingBtn" IsEnabled="{Binding CanEdit}" Style="{StaticResource ButtonIcon}" Foreground="{DynamicResource PrimaryTextBrush}" hc:IconElement.Geometry="{StaticResource SettingsGeometry}"/>
+                <Popup x:Name="mPopup" AllowsTransparency="True" PlacementTarget="{Binding ElementName=SettingBtn}" VerticalOffset="10" HorizontalOffset="25" Placement="Bottom" StaysOpen="False">
+                    <Border Padding="10" Background="{DynamicResource BorderBrush}" CornerRadius="5">
+                        <StackPanel>
+                            <ComboBox SelectedIndex="{Binding Settings.Lang}" SelectionChanged="ComboBox_SelectionChanged" Style="{StaticResource ComboBoxExtendBaseStyle}" hc:InfoElement.Title="{DynamicResource Lang}">
+                                <ComboBoxItem Tag="en" Content="{DynamicResource EnLang}" HorizontalContentAlignment="Center"/>
+                                <ComboBoxItem Tag="fa" Content="{DynamicResource FaLang}" HorizontalContentAlignment="Center"/>
+                            </ComboBox>
+                            <ComboBox SelectedIndex="{Binding Settings.Theme}" Name="ThemeComboBox" SelectionChanged="ThemeComboBox_SelectionChanged" Style="{StaticResource ComboBoxExtendBaseStyle}" hc:InfoElement.Title="{DynamicResource Theme}">
+                                <ComboBoxItem Tag="{x:Static hc:SkinType.Default}" Content="{DynamicResource lTheme}" HorizontalContentAlignment="Center"/>
+                                <ComboBoxItem Tag="{x:Static hc:SkinType.Dark}" Content="{DynamicResource dTheme}" HorizontalContentAlignment="Center"/>
+                                <ComboBoxItem Tag="{x:Static hc:SkinType.Violet}"  Content="{DynamicResource vTheme}" HorizontalContentAlignment="Center"/>
+                            </ComboBox>
+
+                        </StackPanel>
+                    </Border>
+                </Popup>
+            </StackPanel>
+        </Grid>
+    </hc:Window.NonClientAreaContent>
+    <Grid>
+        <Grid.Style>
+            <Style TargetType="{x:Type Grid}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ElementName=this ,Path=Tag}" Value="fa">
+                        <Setter Property="FlowDirection" Value="RightToLeft"/>
+                        <Setter Property="TextElement.FontFamily" Value="{StaticResource Vazir}"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
+        <Border Background="#36000000" Opacity=".4" VerticalAlignment="Top" Height=".6" Panel.ZIndex="2"/>
+        <rx:RoutedViewHost Router="{Binding Router}" Transition="Drop"/>
+    </Grid>
+</hc:Window>
